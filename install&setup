@@ -1,0 +1,25 @@
+#https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-redis-on-ubuntu-20-04
+
+#set password
+sudo nano /etc/redis/redis.conf
+
+#verify password
+
+#use redis-cli
+redis-cli
+
+#inside redis cli connect with password
+auth your_redis_password
+
+#uncomment "requirepass foobared" and set password very strong password -> foobared is password
+# Warning: since Redis is pretty fast an outside user can try up to
+# 150k passwords per second against a good box. This means that you should
+# use a very strong password otherwise it will be very easy to break.
+requirepass foobared
+
+#The other security feature built into Redis involves renaming or completely disabling certain commands that are considered dangerous.
+#When run by unauthorized users, such commands can be used to reconfigure, destroy, or otherwise wipe your data. Like the authentication password, renaming or disabling commands is configured in the same SECURITY section of the /etc/redis/redis.conf file.
+#Some of the commands that are considered dangerous include: FLUSHDB, FLUSHALL, KEYS, PEXPIRE, DEL, CONFIG, SHUTDOWN, BGREWRITEAOF, BGSAVE, SAVE, SPOP, SREM, RENAME, and DEBUG. This is not a comprehensive list, but renaming or disabling all of the commands in that list is a good starting point for enhancing your Redis server’s security.
+#Whether you should disable or rename a command depends on your specific needs or those of your site. If you know you will never use a command that could be abused, then you may disable it. Otherwise, it might be in your best interest to rename it.
+#To rename or disable Redis commands, open the configuration file once more:
+sudo nano  /etc/redis/redis.conf
